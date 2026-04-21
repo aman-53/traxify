@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traxify — Lost Phone Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="toast" id="toast"><span id="t-icon">✅</span><span class="toast-txt" id="t-msg">Done!</span></div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><div class="logo-icon">📡</div>Trax<span>ify</span></div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="go('home')" class="active" id="nl-home">Home</a></li>
+    <li><a href="#" onclick="go('report')" id="nl-report">Report Lost</a></li>
+    <li><a href="#" onclick="go('search')" id="nl-search">Search</a></li>
+    <li><a href="#" onclick="go('found')" id="nl-found">Found Phone</a></li>
+    <li><a href="#" onclick="go('track')" id="nl-track">Track Status</a></li>
+    <li><a href="#" onclick="go('report')" class="nav-cta">+ Report Phone</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mob">
+  <a href="#" onclick="go('home');closeMenu()">🏠 Home</a>
+  <a href="#" onclick="go('report');closeMenu()">📝 Report Lost Phone</a>
+  <a href="#" onclick="go('search');closeMenu()">🔍 Search Database</a>
+  <a href="#" onclick="go('found');closeMenu()">📱 Found a Phone</a>
+  <a href="#" onclick="go('track');closeMenu()">📊 Track Status</a>
+</div>
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-badge"><span class="live-dot"></span>Active Tracking System</div>
+    <h1>Lost Your Phone?<br><span class="hl">We'll Help You</span><br>Find It.</h1>
+    <p class="hero-sub">Report your lost phone, search by IMEI, generate a police report, and track your case — all in one place.</p>
+    <div class="hero-actions">
+      <button class="btn btn-p" onclick="go('report')">📝 Report Lost Phone</button>
+      <button class="btn btn-g" onclick="go('search')">🔍 Search Database</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val">1,284</div><div class="stat-lbl">Phones Reported</div></div>
+      <div class="stat-box"><div class="stat-val">847</div><div class="stat-lbl">Phones Recovered</div></div>
+      <div class="stat-box"><div class="stat-val">65%</div><div class="stat-lbl">Recovery Rate</div></div>
+      <div class="stat-box"><div class="stat-val">24/7</div><div class="stat-lbl">Support</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="sec">
+    <div class="sec-hd">
+      <div class="sec-tag">Features</div>
+      <h2 class="sec-title">Everything You Need</h2>
+      <p class="sec-desc">A complete system to report, search, track and recover lost or stolen phones.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">📝</div><h3>Easy Reporting</h3><p>Fill a simple form with phone details and get a unique Case ID instantly.</p></div>
+      <div class="feat-card"><div class="feat-icon">🔍</div><h3>IMEI Search</h3><p>Search our database using IMEI number to check if a phone has been reported.</p></div>
+      <div class="feat-card"><div class="feat-icon">📄</div><h3>Police Report PDF</h3><p>Generate a ready-to-submit police complaint with one click.</p></div>
+      <div class="feat-card"><div class="feat-icon">📍</div><h3>Case Tracking</h3><p>Track your case status using your Case ID or IMEI number.</p></div>
+      <div class="feat-card"><div class="feat-icon">🤝</div><h3>Found Phone Portal</h3><p>Found someone's phone? Report it here to reunite it with its owner.</p></div>
+      <div class="feat-card"><div class="feat-icon">🔔</div><h3>Status Alerts</h3><p>Get notified when your case status changes or a match is found.</p></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="sec how-bg">
+    <div class="sec-hd">
+      <div class="sec-tag">How It Works</div>
+      <h2 class="sec-title">Simple 4-Step Process</h2>
+      <p class="sec-desc">From reporting to recovery — we keep it simple.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n">01</div><span class="step-e">📝</span><h3>Report Your Phone</h3><p>Fill in phone details — brand, IMEI, and where it was lost.</p></div>
+      <div class="step"><div class="step-n">02</div><span class="step-e">🆔</span><h3>Get Case ID</h3><p>Receive a unique Case ID to track your complaint status anytime.</p></div>
+      <div class="step"><div class="step-n">03</div><span class="step-e">🔎</span><h3>We Search & Match</h3><p>System cross-checks IMEI against found phones in the database.</p></div>
+      <div class="step"><div class="step-n">04</div><span class="step-e">📱</span><h3>Get Reunited</h3><p>If a match is found, you'll be notified to collect your phone.</p></div>
+    </div>
+  </section>
+
+  <!-- RECENT REPORTS TABLE -->
+  <section class="sec">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div class="tbl-hd"><h3>Recent Reports</h3><button class="btn btn-g btn-sm" onclick="go('search')">View All →</button></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Case ID</th><th>Phone Model</th><th>Location</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="td-id">TRX-2847</td><td>Samsung Galaxy S23</td><td>New Delhi, CP</td><td>Apr 18, 2025</td><td><span class="badge b-lost">Lost</span></td></tr>
+            <tr><td class="td-id">TRX-2846</td><td>iPhone 15 Pro</td><td>Mumbai, Dadar</td><td>Apr 17, 2025</td><td><span class="badge b-inv">Investigating</span></td></tr>
+            <tr><td class="td-id">TRX-2845</td><td>OnePlus 12</td><td>Bangalore, MG Road</td><td>Apr 16, 2025</td><td><span class="badge b-found">Found</span></td></tr>
+            <tr><td class="td-id">TRX-2844</td><td>Redmi Note 13</td><td>Chennai, T Nagar</td><td>Apr 15, 2025</td><td><span class="badge b-lost">Lost</span></td></tr>
+            <tr><td class="td-id">TRX-2843</td><td>Realme 12 Pro</td><td>Hyderabad, Charminar</td><td>Apr 14, 2025</td><td><span class="badge b-found">Found</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="logo" style="font-size:1.3rem;"><div class="logo-icon" style="width:28px;height:28px;font-size:0.85rem;">📡</div>Trax<span>ify</span></div>
+        <p>India's trusted lost phone reporting and tracking platform. Helping people recover their devices since 2024.</p>
+        <span class="ft-badge"><span class="live-dot"></span>System Online</span>
+      </div>
+      <div class="ft-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="go('home')">Home</a></li>
+          <li><a href="#" onclick="go('report')">Report Lost Phone</a></li>
+          <li><a href="#" onclick="go('search')">Search Database</a></li>
+          <li><a href="#" onclick="go('found')">Found a Phone</a></li>
+          <li><a href="#" onclick="go('track')">Track Status</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">What is IMEI?</a></li>
+          <li><a href="#">Police Report Guide</a></li>
+          <li><a href="#">Contact Support</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📧 help@traxify.in</a></li>
+          <li><a href="#">📞 1800-TRAXIFY</a></li>
+          <li><a href="#">🕐 Mon–Sat, 9AM–6PM</a></li>
+          <li><a href="#">🏢 New Delhi, India</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <p>© 2025 Traxify. All rights reserved. Made for educational purposes.</p>
+      <div class="ft-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Disclaimer</a></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== REPORT PAGE ===== -->
+<div class="page" id="page-report">
+  <section class="sec">
+    <div class="frm-wrap">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div class="sec-tag">Report</div>
+        <h2 class="sec-title">Report Lost Phone</h2>
+        <p class="sec-desc">Fill in the details below. You'll receive a unique Case ID to track your complaint.</p>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="suc-card" id="rep-suc">
+        <div class="suc-icon">✅</div>
+        <h3 style="font-family:var(--font-d);font-size:1.3rem;font-weight:800;margin-bottom:8px;">Report Submitted!</h3>
+        <p style="color:var(--text2);font-size:0.9rem;">Your case has been registered. Use this Case ID to track status.</p>
+        <div class="case-id-box" id="gen-id">TRX-0000</div>
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:20px;">Save this ID safely. You'll need it to track your case.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-p btn-sm" onclick="toast('Report download started!','🖨️')">🖨️ Download Report</button>
+          <button class="btn btn-g btn-sm" onclick="go('track')">📊 Track Status</button>
+          <button class="btn btn-g btn-sm" onclick="resetRep()">+ New Report</button>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="frm-card" id="rep-form">
+        <div class="frm-top"></div>
+        <p class="frm-sub">👤 Owner Information</p>
+        <p class="frm-hint">Your personal contact details</p>
+        <div class="frm-grid">
+          <div class="frm-grp"><label>Full Name *</label><input type="text" id="r-name" placeholder="Rahul Sharma"><span class="err-msg" id="e-rname">Please enter your name</span></div>
+          <div class="frm-grp"><label>Phone Number *</label><input type="tel" id="r-phone" placeholder="9876543210" maxlength="10"><span class="err-msg" id="e-rphone">Enter valid 10-digit number</span></div>
+          <div class="frm-grp full"><label>Email Address</label><input type="email" id="r-email" placeholder="rahul@email.com"></div>
+        </div>
+        <div class="divider"></div>
+        <p class="frm-sub">📱 Phone Details</p>
+        <p class="frm-hint">Details about the lost device</p>
+        <div class="frm-grid">
+          <div class="frm-grp"><label>Brand *</label>
+            <select id="r-brand">
+              <option value="">Select Brand</option>
+              <option>Samsung</option><option>Apple (iPhone)</option><option>OnePlus</option>
+              <option>Xiaomi / Redmi</option><option>Realme</option><option>Oppo</option>
+              <option>Vivo</option><option>Motorola</option><option>Nothing</option><option>Other</option>
+            </select>
+            <span class="err-msg" id="e-rbrand">Please select a brand</span>
+          </div>
+          <div class="frm-grp"><label>Model Name *</label><input type="text" id="r-model" placeholder="e.g. Galaxy S23, iPhone 15"><span class="err-msg" id="e-rmodel">Enter phone model</span></div>
+          <div class="frm-grp"><label>Color</label><input type="text" id="r-color" placeholder="e.g. Black, Silver"></div>
+          <div class="frm-grp"><label>IMEI Number *</label><input type="text" id="r-imei" placeholder="15-digit IMEI" maxlength="15"><span class="hint">Dial *#06# to find IMEI</span><span class="err-msg" id="e-rimei">Enter valid 15-digit IMEI</span></div>
+        </div>
+        <div class="divider"></div>
+        <p class="frm-sub">📍 Incident Details</p>
+        <p class="frm-hint">Where and when was the phone lost?</p>
+        <div class="frm-grid">
+          <div class="frm-grp full"><label>Location Where Lost *</label><input type="text" id="r-loc" placeholder="e.g. Connaught Place, New Delhi"><span class="err-msg" id="e-rloc">Enter location</span></div>
+          <div class="frm-grp"><label>Date Lost *</label><input type="date" id="r-date"><span class="err-msg" id="e-rdate">Select date</span></div>
+          <div class="frm-grp"><label>Approx. Time</label><input type="time" id="r-time"></div>
+          <div class="frm-grp full"><label>Additional Description</label><textarea id="r-desc" placeholder="Case color, stickers, marks, or how it was lost..."></textarea></div>
+        </div>
+        <div class="frm-actions">
+          <button class="btn btn-p btn-full" onclick="submitRep()">📝 Submit Report & Get Case ID</button>
+          <button class="btn btn-g btn-sm" onclick="resetRep()">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== SEARCH PAGE ===== -->
+<div class="page" id="page-search">
+  <div class="srch-hero">
+    <div class="sec-tag">Search</div>
+    <h2 class="sec-title">Search Phone Database</h2>
+    <p class="sec-desc">Search by IMEI, phone model, brand, or location.</p>
+    <div class="srch-box">
+      <input class="srch-inp" type="text" id="s-inp" placeholder="IMEI number, phone model, brand..." onkeypress="if(event.key==='Enter')doSearch()">
+      <button class="srch-btn" onclick="doSearch()">🔍 Search</button>
+    </div>
+    <div class="filters">
+      <button class="chip active" onclick="filterBy('all',this)">All</button>
+      <button class="chip" onclick="filterBy('lost',this)">Lost</button>
+      <button class="chip" onclick="filterBy('found',this)">Found</button>
+      <button class="chip" onclick="filterBy('inv',this)">Investigating</button>
+    </div>
+  </div>
+  <div class="srch-res" id="s-res"></div>
+</div>
+
+<!-- ===== FOUND PAGE ===== -->
+<div class="page" id="page-found">
+  <section class="sec">
+    <div class="frm-wrap">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div class="sec-tag">Found a Phone</div>
+        <h2 class="sec-title">Report a Found Phone</h2>
+        <p class="sec-desc">Help us reunite a lost phone with its owner by sharing the details below.</p>
+      </div>
+      <div class="suc-card" id="fnd-suc">
+        <div class="suc-icon">🤝</div>
+        <h3 style="font-family:var(--font-d);font-size:1.3rem;font-weight:800;margin-bottom:8px;">Thank You!</h3>
+        <p style="color:var(--text2);font-size:0.9rem;margin-bottom:16px;">Found phone logged. We'll try to contact the owner.</p>
+        <div class="case-id-box" id="fnd-id">FND-0000</div>
+        <div style="margin-top:16px;"><button class="btn btn-g btn-sm" onclick="resetFnd()">Report Another</button></div>
+      </div>
+      <div class="frm-card" id="fnd-form">
+        <div class="frm-top frm-top-g"></div>
+        <div class="frm-grid">
+          <div class="frm-grp"><label>Your Name *</label><input type="text" id="f-name" placeholder="Your full name"><span class="err-msg" id="e-fname">Please enter your name</span></div>
+          <div class="frm-grp"><label>Your Contact *</label><input type="tel" id="f-phone" placeholder="Your phone number" maxlength="10"><span class="err-msg" id="e-fphone">Enter valid 10-digit number</span></div>
+          <div class="frm-grp"><label>Found Phone Brand</label>
+            <select id="f-brand">
+              <option value="">Select Brand</option>
+              <option>Samsung</option><option>Apple (iPhone)</option><option>OnePlus</option>
+              <option>Xiaomi / Redmi</option><option>Realme</option><option>Oppo</option>
+              <option>Vivo</option><option>Motorola</option><option>Other</option>
+            </select>
+          </div>
+          <div class="frm-grp"><label>Phone Color</label><input type="text" id="f-color" placeholder="e.g. Black, White"></div>
+          <div class="frm-grp"><label>IMEI (if visible)</label><input type="text" id="f-imei" placeholder="Check Settings > About" maxlength="15"></div>
+          <div class="frm-grp"><label>Date Found</label><input type="date" id="f-date"></div>
+          <div class="frm-grp full"><label>Where Was It Found? *</label><input type="text" id="f-loc" placeholder="e.g. Near Metro Station, Rajiv Chowk"><span class="err-msg" id="e-floc">Enter location</span></div>
+          <div class="frm-grp full"><label>Additional Notes</label><textarea id="f-notes" placeholder="Condition of phone, case color, any visible damage..."></textarea></div>
+        </div>
+        <div class="frm-actions">
+          <button class="btn btn-s btn-full" onclick="submitFnd()">🤝 Submit Found Phone Report</button>
+          <button class="btn btn-g btn-sm" onclick="resetFnd()">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== TRACK PAGE ===== -->
+<div class="page" id="page-track">
+  <section class="sec">
+    <div class="trk-wrap">
+      <div style="text-align:center;margin-bottom:32px;">
+        <div class="sec-tag">Track</div>
+        <h2 class="sec-title">Track Your Case</h2>
+        <p class="sec-desc">Enter your Case ID or IMEI to see the current status of your report.</p>
+      </div>
+      <div class="trk-box">
+        <h4 style="font-family:var(--font-d);font-weight:700;margin-bottom:6px;">Enter Case ID or IMEI</h4>
+        <p style="font-size:0.85rem;color:var(--text2);">Example: TRX-2847 or your 15-digit IMEI</p>
+        <div class="trk-row">
+          <input class="trk-inp" type="text" id="t-inp" placeholder="e.g. TRX-2847 or IMEI..." onkeypress="if(event.key==='Enter')trackCase()">
+          <button class="trk-btn" onclick="trackCase()">Track →</button>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="chip" onclick="document.getElementById('t-inp').value='TRX-2847';trackCase()">Try TRX-2847</button>
+          <button class="chip" onclick="document.getElementById('t-inp').value='TRX-2846';trackCase()">Try TRX-2846</button>
+          <button class="chip" onclick="document.getElementById('t-inp').value='TRX-2845';trackCase()">Try TRX-2845</button>
+        </div>
+      </div>
+      <div id="t-result" style="display:none;">
+        <div class="trk-box" style="margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+            <div>
+              <p style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Case ID</p>
+              <h3 id="t-caseid" style="font-family:var(--font-d);font-size:1.4rem;font-weight:800;color:var(--accent);">TRX-0000</h3>
+            </div>
+            <span class="badge" id="t-badge">Lost</span>
+          </div>
+          <div class="divider" style="margin:12px 0;"></div>
+          <div class="meta-grid">
+            <div class="meta-item"><p>Phone</p><p id="t-phone">—</p></div>
+            <div class="meta-item"><p>Location</p><p id="t-loc">—</p></div>
+            <div class="meta-item"><p>Date Reported</p><p id="t-date">—</p></div>
+            <div class="meta-item"><p>Last Updated</p><p id="t-upd">—</p></div>
+          </div>
+        </div>
+        <div class="trk-box">
+          <h4 style="font-family:var(--font-d);font-weight:700;margin-bottom:20px;">📋 Case Timeline</h4>
+          <div id="t-tl"></div>
+        </div>
+      </div>
+      <div id="t-notfound" style="display:none;" class="empty">
+        <div class="ei">🔍</div>
+        <h3 style="font-family:var(--font-d);font-weight:700;margin-bottom:8px;">Case Not Found</h3>
+        <p>No case found with this ID. Check and try again, or <a href="#" onclick="go('report')" style="color:var(--accent);">report a new case</a>.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
